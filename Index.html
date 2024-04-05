@@ -1,1 +1,53 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Liste des Tâches - Challenge</title>
+    <link rel="stylesheet" href="Styles.css">
+</head>
+<body>
+    <div class="header">
+        <h1>Liste des Tâches</h1>
+    </div>
+
+    <div class="task-form">
+        <h2>Ajouter une Nouvelle Tâche</h2>
+        <form id="taskForm">
+            <label for="taskInput">Tâche :</label><br>
+            <input type="text" id="taskInput" name="taskInput" required><br>
+
+            <label for="deadlineInput">Date d'Échéance :</label><br>
+            <input type="date" id="deadlineInput" name="deadlineInput"><br>
+
+            <label for="priorityInput">Priorité :</label><br>
+            <select id="priorityInput" name="priorityInput">
+                <option value="Urgente">Urgente</option>
+                <option value="Importante">Importante</option>
+                <option value="Ordinaire">Ordinaire</option>
+            </select><br>
+
+            <button type="submit">Ajouter</button>
+        </form>
+    </div>
+
+    <div class="task-list">
+        <h2>Liste des Tâches</h2>
+        <div class="task-item">
+            <input type="checkbox" id="task1" name="task1">
+            <label for="task1">Tâche 1</label>
+            <button class="delete-btn">Supprimer</button>
+        </div>
+        <!-- Autres tâches -->
+    </div>
+
+    <div class="task-details">
+        <h2>Détails de la Tâche</h2>
+        <div id="taskDetails"></div>
+    </div>
+    
+
+    <script src="script.js"></script> <!-- Lien vers votre fichier JavaScript -->
+</body>
+</html>
 

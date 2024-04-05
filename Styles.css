@@ -1,1 +1,118 @@
+:root {
+    --blue-color: #007bff;
+    --green-color: #28a745;
+    --red-color: #dc3545;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+.header {
+    background-color: var(--blue-color);
+    color: white;
+    padding: 20px;
+    text-align: center;
+}
+
+.task-form {
+    margin: 20px auto;
+    width: 50%;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+}
+
+.task-form h2 {
+    color: var(--blue-color);
+}
+
+.task-form label {
+    font-weight: bold;
+}
+
+.task-form input[type="text"],
+.task-form input[type="date"],
+.task-form select {
+    width: 100%;
+    padding: 10px;
+    margin: 5px 0 15px 0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+.task-form button[type="submit"] {
+    background-color: var(--blue-color);
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.task-form button[type="submit"]:hover {
+    background-color: #0056b3;
+}
+
+.task-list {
+    margin: 20px auto;
+    width: 50%;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+}
+
+.task-list h2 {
+    color: var(--blue-color);
+}
+
+.task-item {
+    margin-bottom: 10px;
+}
+
+.task-item label {
+    margin-left: 10px;
+}
+
+.delete-btn {
+    background-color: var(--red-color);
+    color: white;
+    padding: 5px 10px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.delete-btn:hover {
+    background-color: #c82333;
+}
+
+/* Ajout des animations */
+
+.task-item {
+    margin-bottom: 10px;
+    transition: all 0.3s ease;
+}
+
+.task-item:hover {
+    transform: scale(1.05);
+}
+
+.task-details {
+    display: none;
+    margin-top: 20px;
+    padding: 20px;
+    border-radius: 8px;
+}
+
+.task-details h2 {
+    color: white;
+}
+
+.task-details p {
+    margin: 5px 0;
+}
 
