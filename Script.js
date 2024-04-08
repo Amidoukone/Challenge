@@ -122,8 +122,14 @@ taskList.addEventListener("click", function(event) {
             <p><strong>Tâche :</strong> ${taskText}</p>
             <p><strong>Priorité :</strong> ${taskPriority}</p>
             <p><strong>Statut :</strong> ${taskStatus}</p>
-            <p><strong>Date d'échéance :</strong> ${deadlineInput.value}</p>
         `;
+
+        // Récupérer la date d'échéance du formulaire
+        const deadlineInput = document.getElementById("deadlineInput"); // Sélectionner à nouveau l'élément
+        const deadline = deadlineInput.value;
+
+        // Inclure la date d'échéance dans le contenu des détails de la tâche
+        taskDetailsContent.innerHTML += `<p><strong>Date d'échéance :</strong> ${deadline}</p>`;
 
         // Mettre à jour les styles en fonction de la priorité de la tâche
         switch (taskPriority) {
