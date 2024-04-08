@@ -8,6 +8,9 @@ document.addEventListener("DOMContentLoaded", function() {
     // Sélection de la liste des tâches
     const taskList = document.querySelector(".task-list");
 
+    // Charger les tâches depuis le stockage local au chargement de la page
+    loadTasks();
+
     // Ajouter une nouvelle tâche
     taskForm.addEventListener("submit", function(event) {
         event.preventDefault();
@@ -20,6 +23,7 @@ document.addEventListener("DOMContentLoaded", function() {
         // Créer un nouvel élément de tâche
         const taskItem = document.createElement("div");
         taskItem.classList.add("task-item");
+        taskItem.dataset.priority = priority; // Enregistrer la priorité de la tâche
 
         const checkbox = document.createElement("input");
         checkbox.type = "checkbox";
@@ -39,6 +43,9 @@ document.addEventListener("DOMContentLoaded", function() {
         // Ajouter la tâche à la liste des tâches
         taskList.appendChild(taskItem);
 
+        // Enregistrer les tâches dans le stockage local
+        saveTasks();
+
         // Effacer le formulaire après l'ajout de la tâche
         taskForm.reset();
     });
@@ -48,8 +55,50 @@ document.addEventListener("DOMContentLoaded", function() {
         if (event.target.classList.contains("delete-btn")) {
             const taskItem = event.target.closest(".task-item");
             taskItem.remove();
+            // Enregistrer les tâches dans le stockage local après la suppression
+            saveTasks();
         }
     });
+
+    // Charger les tâches depuis le stockage local
+    function loadTasks() {
+        const tasks = JSON.parse(localStorage.getItem("tasks")) || [];
+        tasks.forEach(task => {
+            const taskItem = document.createElement("div");
+            taskItem.classList.add("task-item");
+            taskItem.dataset.priority = task.priority;
+
+            const checkbox = document.createElement("input");
+            checkbox.type = "checkbox";
+
+            const label = document.createElement("label");
+            label.textContent = task.text;
+
+            const deleteButton = document.createElement("button");
+            deleteButton.classList.add("delete-btn");
+            deleteButton.textContent = "Supprimer";
+
+            // Ajouter les éléments à la tâche
+            taskItem.appendChild(checkbox);
+            taskItem.appendChild(label);
+            taskItem.appendChild(deleteButton);
+
+            // Ajouter la tâche à la liste des tâches
+            taskList.appendChild(taskItem);
+        });
+    }
+
+    // Enregistrer les tâches dans le stockage local
+    function saveTasks() {
+        const tasks = [];
+        document.querySelectorAll(".task-item").forEach(taskItem => {
+            tasks.push({
+                text: taskItem.querySelector("label").textContent,
+                priority: taskItem.dataset.priority
+            });
+        });
+        localStorage.setItem("tasks", JSON.stringify(tasks));
+    }
 });
 
 // Sélection de la liste des tâches
@@ -73,6 +122,7 @@ taskList.addEventListener("click", function(event) {
             <p><strong>Tâche :</strong> ${taskText}</p>
             <p><strong>Priorité :</strong> ${taskPriority}</p>
             <p><strong>Statut :</strong> ${taskStatus}</p>
+            <p><strong>Date d'échéance :</strong> ${deadlineInput.value}</p>
         `;
 
         // Mettre à jour les styles en fonction de la priorité de la tâche
@@ -95,4 +145,3 @@ taskList.addEventListener("click", function(event) {
         taskDetails.style.display = "block";
     }
 });
-

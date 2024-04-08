@@ -26,16 +26,22 @@ header {
 }
 
 .logo img {
-    width: 100px; /* Taille du logo */
+    width: 200px; /* Taille du logo */
 }
 
 .title {
     /* background-color: var(--blue-color); */
     flex: 1;
     text-align: right;
+    width: 50px;
 }
 .content{
     background-color: var(--blue-color);
+    width: 140px;
+    float: right;
+    color: #ffffff;
+    border-radius: 8px;
+
 }
 
 /* Image d'accueil */
