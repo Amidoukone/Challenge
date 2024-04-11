@@ -27,17 +27,27 @@ document.addEventListener("DOMContentLoaded", function() {
 
         const checkbox = document.createElement("input");
         checkbox.type = "checkbox";
+        checkbox.addEventListener("change", function() {
+            updateTaskStatus(taskItem);
+        });
 
         const label = document.createElement("label");
-        label.textContent = taskText;
+        label.textContent = `${taskText} (Priorité : ${priority})`; // Afficher la valeur de la tâche avec la priorité
+
+        const deadlinePara = document.createElement("p");
+        deadlinePara.textContent = `Date d'échéance : ${deadline}`;
 
         const deleteButton = document.createElement("button");
         deleteButton.classList.add("delete-btn");
         deleteButton.textContent = "Supprimer";
+        deleteButton.addEventListener("click", function() {
+            deleteTask(taskItem);
+        });
 
         // Ajouter les éléments à la tâche
         taskItem.appendChild(checkbox);
         taskItem.appendChild(label);
+        taskItem.appendChild(deadlinePara);
         taskItem.appendChild(deleteButton);
 
         // Ajouter la tâche à la liste des tâches
@@ -51,41 +61,70 @@ document.addEventListener("DOMContentLoaded", function() {
     });
 
     // Supprimer une tâche
-    taskList.addEventListener("click", function(event) {
-        if (event.target.classList.contains("delete-btn")) {
-            const taskItem = event.target.closest(".task-item");
-            taskItem.remove();
-            // Enregistrer les tâches dans le stockage local après la suppression
-            saveTasks();
+    function deleteTask(taskItem) {
+        taskItem.remove();
+        // Enregistrer les tâches dans le stockage local après la suppression
+        saveTasks();
+    }
+
+    // Mettre à jour le statut d'une tâche
+    function updateTaskStatus(taskItem) {
+        const checkbox = taskItem.querySelector("input[type='checkbox']");
+        const label = taskItem.querySelector("label");
+        if (checkbox.checked) {
+            label.style.textDecoration = "line-through";
+        } else {
+            label.style.textDecoration = "none";
         }
-    });
+        // Enregistrer les tâches dans le stockage local après la mise à jour du statut
+        saveTasks();
+    }
 
     // Charger les tâches depuis le stockage local
     function loadTasks() {
         const tasks = JSON.parse(localStorage.getItem("tasks")) || [];
         tasks.forEach(task => {
-            const taskItem = document.createElement("div");
-            taskItem.classList.add("task-item");
-            taskItem.dataset.priority = task.priority;
-
-            const checkbox = document.createElement("input");
-            checkbox.type = "checkbox";
-
-            const label = document.createElement("label");
-            label.textContent = task.text;
-
-            const deleteButton = document.createElement("button");
-            deleteButton.classList.add("delete-btn");
-            deleteButton.textContent = "Supprimer";
-
-            // Ajouter les éléments à la tâche
-            taskItem.appendChild(checkbox);
-            taskItem.appendChild(label);
-            taskItem.appendChild(deleteButton);
-
-            // Ajouter la tâche à la liste des tâches
+            const taskItem = createTaskElement(task.text, task.deadline, task.priority, task.completed);
             taskList.appendChild(taskItem);
         });
+    }
+
+    // Créer un élément de tâche
+    function createTaskElement(taskText, deadline, priority, completed) {
+        const taskItem = document.createElement("div");
+        taskItem.classList.add("task-item");
+        taskItem.dataset.priority = priority;
+
+        const checkbox = document.createElement("input");
+        checkbox.type = "checkbox";
+        checkbox.checked = completed;
+        checkbox.addEventListener("change", function() {
+            updateTaskStatus(taskItem);
+        });
+
+        const label = document.createElement("label");
+        label.textContent = taskText;
+        if (completed) {
+            label.style.textDecoration = "line-through";
+        }
+
+        const deadlinePara = document.createElement("p");
+        deadlinePara.textContent = `Date d'échéance : ${deadline}`;
+
+        const deleteButton = document.createElement("button");
+        deleteButton.classList.add("delete-btn");
+        deleteButton.textContent = "Supprimer";
+        deleteButton.addEventListener("click", function() {
+            deleteTask(taskItem);
+        });
+
+        // Ajouter les éléments à la tâche
+        taskItem.appendChild(checkbox);
+        taskItem.appendChild(label);
+        taskItem.appendChild(deadlinePara);
+        taskItem.appendChild(deleteButton);
+
+        return taskItem;
     }
 
     // Enregistrer les tâches dans le stockage local
@@ -94,60 +133,11 @@ document.addEventListener("DOMContentLoaded", function() {
         document.querySelectorAll(".task-item").forEach(taskItem => {
             tasks.push({
                 text: taskItem.querySelector("label").textContent,
-                priority: taskItem.dataset.priority
+                deadline: taskItem.querySelector("p").textContent.split(": ")[1],
+                priority: taskItem.dataset.priority,
+                completed: taskItem.querySelector("input[type='checkbox']").checked
             });
         });
         localStorage.setItem("tasks", JSON.stringify(tasks));
-    }
-});
-
-// Sélection de la liste des tâches
-const taskList = document.querySelector(".task-list");
-
-// Sélection de la section des détails de la tâche
-const taskDetails = document.querySelector(".task-details");
-const taskDetailsContent = document.getElementById("taskDetails");
-
-// Gérer le clic sur une tâche pour afficher les détails
-taskList.addEventListener("click", function(event) {
-    const taskItem = event.target.closest(".task-item");
-    if (taskItem) {
-        // Récupérer les détails de la tâche
-        const taskText = taskItem.querySelector("label").textContent;
-        const taskPriority = taskItem.dataset.priority;
-        const taskStatus = taskItem.querySelector("input[type='checkbox']").checked ? "Terminée" : "En cours";
-
-        // Mettre à jour les détails de la tâche dans la section des détails
-        taskDetailsContent.innerHTML = `
-            <p><strong>Tâche :</strong> ${taskText}</p>
-            <p><strong>Priorité :</strong> ${taskPriority}</p>
-            <p><strong>Statut :</strong> ${taskStatus}</p>
-        `;
-
-        // Récupérer la date d'échéance du formulaire
-        const deadlineInput = document.getElementById("deadlineInput"); // Sélectionner à nouveau l'élément
-        const deadline = deadlineInput.value;
-
-        // Inclure la date d'échéance dans le contenu des détails de la tâche
-        taskDetailsContent.innerHTML += `<p><strong>Date d'échéance :</strong> ${deadline}</p>`;
-
-        // Mettre à jour les styles en fonction de la priorité de la tâche
-        switch (taskPriority) {
-            case "Urgente":
-                taskDetails.style.backgroundColor = "#dc3545";
-                taskDetails.style.color = "white";
-                break;
-            case "Importante":
-                taskDetails.style.backgroundColor = "#007bff";
-                taskDetails.style.color = "white";
-                break;
-            case "Ordinaire":
-                taskDetails.style.backgroundColor = "#28a745";
-                taskDetails.style.color = "white";
-                break;
-        }
-
-        // Afficher la section des détails de la tâche
-        taskDetails.style.display = "block";
     }
 });

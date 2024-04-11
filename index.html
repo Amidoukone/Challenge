@@ -1,54 +1,69 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
+    <!-- Meta tags -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Titre de la page -->
     <title>Liste de Tâches Interactive - Challenge</title>
+    <!-- Feuille de style -->
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+    <!-- En-tête -->
     <header>
+        <!-- Logo -->
         <div class="logo"><img src="Images/Logo_challenge.png" alt="Image d'illustration"/></div>
+        <!-- Titre -->
         <div class="title"><h1 class="content">Challenge</h1></div>
     </header>
 
+    <!-- Contenu principal -->
     <main>
+        <!-- Conteneur de l'image et du texte -->
         <div class="image-container">
+            <!-- Image d'illustration -->
             <img src="Images/Accueil_image.png" alt="Image d'illustration"/>
+            <!-- Texte d'information -->
             <h2 class="text">Pas de tâches ...</h2>
         </div>
+        <!-- Conteneur des sections -->
         <div class="container">
+            <!-- Section pour ajouter une nouvelle tâche -->
             <section class="task-input">
+                <!-- Titre de la section -->
                 <h2>Ajouter une Nouvelle Tâche</h2>
+                <!-- Formulaire pour ajouter une tâche -->
                 <form id="taskForm">
+                    <!-- Champ pour entrer le nom de la tâche -->
                     <input type="text" id="taskInput" placeholder="Nom de la nouvelle tâche" required>
+                    <!-- Champ pour entrer la date d'échéance -->
                     <label for="deadlineInput">Date d'échéance :</label>
                     <input type="date" id="deadlineInput" name="deadline">
+                    <!-- Sélecteur de priorité -->
                     <label for="priorityInput">Priorité :</label>
                     <select id="priorityInput">
                         <option value="Urgente">Urgente</option>
                         <option value="Importante">Importante</option>
                         <option value="Ordinaire">Ordinaire</option>
                     </select>
+                    <!-- Bouton de validation -->
                     <button type="submit">Valider</button>
                 </form>
             </section>
 
+            <!-- Section pour afficher la liste des tâches -->
             <section class="task-list">
+                <!-- Titre de la section -->
                 <h2>Liste des Tâches</h2>
-
+                <!-- La liste des tâches sera générée dynamiquement ici -->
             </section>
         </div>
-
-        <div class="task-details">
-            <h2>Détails de la Tâche</h2>
-            <div id="taskDetails"></div>
-        </div>
+        <!-- Un saut de ligne pour une meilleure apparence -->
+        <br>
     </main>
 
-
+    <!-- Script JavaScript -->
     <script src="script.js"></script>
 </body>
 </html>
-
-

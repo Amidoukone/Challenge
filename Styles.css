@@ -1,28 +1,27 @@
-/* Couleurs */
+/* Définition des couleurs personnalisées */
 :root {
-    --blue-color: #007bff;
-    --green-color: #dfe9e1;
-    --red-color: #dc3545;
+    --blue-color: #007bff; /* Couleur bleue */
+    --green-color: #dfe9e1; /* Couleur verte */
+    --red-color: #dc3545; /* Couleur rouge */
 }
 
 /* Styles généraux */
 body {
-    font-family: 'Times New Roman', Times, serif, sans-serif;
-    margin: 0;
-    padding: 0;
+    font-family: 'Times New Roman', Times, serif, sans-serif; /* Police de caractères */
+    margin: 0; /* Suppression des marges */
+    padding: 0; /* Suppression des espacements internes */
 }
 
 /* En-tête */
 header {
-    color: rgb(0, 0, 0);
-    display: flex;
-    align-items: center;
-    padding: 10px;
-    align-items: center;
+    color: rgb(0, 0, 0); /* Couleur du texte */
+    display: flex; /* Affichage en mode flexbox */
+    align-items: center; /* Alignement vertical au centre */
+    padding: 10px; /* Espacement intérieur */
 }
 
 .logo {
-    flex: 0 0 auto;
+    flex: 0 0 auto; /* Ne pas agrandir, ne pas réduire, taille automatique */
 }
 
 .logo img {
@@ -30,144 +29,100 @@ header {
 }
 
 .title {
-    /* background-color: var(--blue-color); */
-    flex: 1;
-    text-align: right;
-    width: 50px;
+    flex: 1; /* Agrandissement de l'espace disponible */
+    text-align: right; /* Alignement à droite */
+    width: 50px; /* Largeur fixe */
+    margin-right: 30px; /* Marge à droite */
 }
-.content{
-    background-color: var(--blue-color);
-    width: 140px;
-    float: right;
-    color: #ffffff;
-    border-radius: 8px;
 
+.content{
+    background-color: var(--blue-color); /* Couleur de fond */
+    width: 140px; /* Largeur */
+    float: right; /* Flottement à droite */
+    color: #ffffff; /* Couleur du texte */
+    border-radius: 8px; /* Bordure arrondie */
 }
 
 /* Image d'accueil */
 .image-container {
-    text-align: center;
-    margin-top: 20px;
+    text-align: center; /* Alignement du texte au centre */
+    margin-top: 10px; /* Marge en haut */
 }
 
 .image-container img {
-    max-width: 30%; /* Ajuster la largeur de l'image au conteneur */
+    max-width: 15%; /* Largeur maximale */
+    margin-bottom: 10px; /* Marge en bas */
 }
 
 /* Conteneur principal */
 .container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 20px;
-    padding: 0 20px;
+    display: grid; /* Utilisation de CSS Grid */
+    grid-template-columns: repeat(2, 1fr); /* Deux colonnes égales */
+    gap: 20px; /* Espacement entre les éléments */
+    padding: 0 20px; /* Espacement intérieur */
 }
 
 /* Formulaire d'ajout de tâche */
 .task-input {
-    background-color: var(--green-color);
-    border: 1px solid var(--blue-color);
-    border-radius: 8px;
-    padding: 20px;
-    width: 100%;
-    max-width: 500px; /* Largeur maximale du formulaire */
+    background-color: var(--green-color); /* Couleur de fond */
+    border: 1px solid var(--blue-color); /* Bordure */
+    border-radius: 8px; /* Bordure arrondie */
+    padding: 20px; /* Espacement intérieur */
 }
 
 .task-input h2 {
-    margin-top: 0;
+    margin-top: 0; /* Suppression de la marge supérieure */
+    text-align: center; /* Alignement au centre */
 }
 
 .task-input form {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
+    display: flex; /* Affichage en mode flexbox */
+    flex-direction: column; /* Empilement vertical */
+    gap: 10px; /* Espacement entre les éléments */
 }
 
 .task-input input[type="text"],
 .task-input select,
 .task-input button {
-    width: 100%;
-    padding: 10px;
-    border-radius: 5px;
-    border: 1px solid #ced4da;
+    padding: 10px; /* Espacement intérieur */
+    border-radius: 5px; /* Bordure arrondie */
+    border: 1px solid #ced4da; /* Bordure */
 }
 
 /* Liste des tâches */
 .task-list {
-    background-color: var(--green-color);
-    border: 1px solid var(--blue-color);
-    border-radius: 8px;
-    padding: 20px;
-    width: 100%;
-    max-width: 500px; /* Largeur maximale de la liste des tâches */
-}
-
-.task-list h2 {
-    margin-top: 0;
+    background-color: var(--green-color); /* Couleur de fond */
+    border: 1px solid var(--blue-color); /* Bordure */
+    border-radius: 8px; /* Bordure arrondie */
+    padding: 20px; /* Espacement intérieur */
 }
 
 .task-list .task-item {
-    display: flex;
-    aligen-itms: center;
-    gap: 10px;
+    display: flex; /* Affichage en mode flexbox */
+    align-items: center; /* Alignement vertical au centre */
+    gap: 10px; /* Espacement entre les éléments */
 }
 
 .task-list .task-item label {
-    flex: 1;
+    flex: 1; /* Agrandissement de l'espace disponible */
 }
 
 button[type="submit"] {
-    background-color: var(--blue-color);
-    color: #ffffff;
+    background-color: var(--blue-color); /* Couleur de fond */
+    color: #ffffff; /* Couleur du texte */
 }
 
 button[type="submit"]:hover {
-    background-color: #218838;
-    color: #ffffff;
+    background-color: #218838; /* Couleur de fond au survol */
+    color: #ffffff; /* Couleur du texte au survol */
 }
 
-
-.task-details {
-    background-color: var(--green-color);
-    border: 1px solid var(--blue-color);
-    border-radius: 8px;
-    padding: 20px;
-    width: 100%;
-    max-width: 500px;
-    margin: 20px auto;
-    /* display: none; */
+/* Media query pour rendre le design responsive */
+@media (max-width: 768px) {
+    .container {
+        grid-template-columns: 1fr; /* Une seule colonne */
+    }
+    .task-input, .task-list, .task-details {
+        max-width: 100%; /* Largeur maximale de 100% */
+    }
 }
-
-
-
-.task-details h2 {
-    margin-top: 0;
-}
-
-.task-details p {
-    margin: 5px 0;
-}
-
-/* Pied de page */
-footer {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-}
-
-footer button {
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    background-color: var(--blue-color);
-    color: white;
-    font-size: 24px;
-    border: none;
-    cursor: pointer;
-}
-
-footer button:hover {
-    background-color: #0056b3;
-}
-
-
