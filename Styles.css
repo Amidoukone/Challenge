@@ -95,6 +95,10 @@ header {
     border: 1px solid var(--blue-color); /* Bordure */
     border-radius: 8px; /* Bordure arrondie */
     padding: 20px; /* Espacement intérieur */
+    overflow-wrap: anywhere;
+    max-height: 300px;
+    overflow-y: auto;
+    overflow-x: hidden;
 }
 
 .task-list .task-item {
