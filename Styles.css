@@ -20,13 +20,6 @@ header {
     padding: 10px; /* Espacement intérieur */
 }
 
-.logo {
-    flex: 0 0 auto; /* Ne pas agrandir, ne pas réduire, taille automatique */
-}
-
-.logo img {
-    width: 200px; /* Taille du logo */
-}
 
 .title {
     flex: 1; /* Agrandissement de l'espace disponible */
@@ -61,6 +54,7 @@ header {
     gap: 20px; /* Espacement entre les éléments */
     padding: 0 20px; /* Espacement intérieur */
 }
+
 
 /* Formulaire d'ajout de tâche */
 .task-input {
@@ -99,6 +93,7 @@ header {
     max-height: 300px;
     overflow-y: auto;
     overflow-x: hidden;
+    text-align: center;
 }
 
 .task-list .task-item {
@@ -121,6 +116,8 @@ button[type="submit"]:hover {
     color: #ffffff; /* Couleur du texte au survol */
 }
 
+
+
 /* Media query pour rendre le design responsive */
 @media (max-width: 768px) {
     .container {
@@ -128,15 +125,6 @@ button[type="submit"]:hover {
     }
     .task-input, .task-list, .task-details {
         max-width: 100%; /* Largeur maximale de 100% */
-    }
-
-    .logo img {
-        width: 100%; /* Largeur maximale pour s'adapter aux écrans plus petits */
-    }
-
-    .title {
-        text-align: center; /* Centrer le texte sur les écrans plus petits */
-        margin-right: 0; /* Supprimer la marge sur les côtés pour utiliser tout l'espace disponible */
     }
 
     .content {
@@ -148,33 +136,3 @@ button[type="submit"]:hover {
         max-width: 80%; /* Réduire la taille de l'image pour s'adapter aux écrans plus petits */
     }
 }
-
-/* Media query pour rendre le design responsive */
-@media (max-width: 768px) {
-    .container {
-        grid-template-columns: 1fr; /* Une seule colonne */
-    }
-    .task-input, .task-list, .task-details {
-        max-width: 100%; /* Largeur maximale de 100% */
-    }
-
-    .logo img {
-        width: 100%; /* Largeur maximale pour s'adapter aux écrans plus petits */
-    }
-
-    .title {
-        text-align: center; /* Centrer le texte sur les écrans plus petits */
-        margin-right: 0; /* Supprimer la marge sur les côtés pour utiliser tout l'espace disponible */
-    }
-
-    .content {
-        width: auto; /* Largeur automatique pour s'adapter au contenu */
-        float: none; /* Annuler le flottement pour centrer le contenu */
-    }
-
-    .image-container img {
-        max-width: 80%; /* Réduire la taille de l'image pour s'adapter aux écrans plus petits */
-    }
-}
-
-

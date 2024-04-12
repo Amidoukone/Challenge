@@ -58,6 +58,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
         // Effacer le formulaire après l'ajout de la tâche
         taskForm.reset();
+        
     });
 
     // Supprimer une tâche
