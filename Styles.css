@@ -20,12 +20,9 @@ header {
     padding: 10px; /* Espacement intérieur */
 }
 
-
-.title {
-    flex: 1; /* Agrandissement de l'espace disponible */
-    text-align: right; /* Alignement à droite */
-    width: 50px; /* Largeur fixe */
-    margin-right: 30px; /* Marge à droite */
+.text {
+    padding: 0;
+    margin-top: 2rem;
 }
 
 .content{
@@ -39,7 +36,8 @@ header {
 /* Image d'accueil */
 .image-container {
     text-align: center; /* Alignement du texte au centre */
-    margin-top: 10px; /* Marge en haut */
+    padding: 0;
+    margin-bottom: 0;
 }
 
 .image-container img {
@@ -117,22 +115,37 @@ button[type="submit"]:hover {
 }
 
 
-
 /* Media query pour rendre le design responsive */
 @media (max-width: 768px) {
     .container {
         grid-template-columns: 1fr; /* Une seule colonne */
     }
-    .task-input, .task-list, .task-details {
+
+    .task-input, .task-list {
         max-width: 100%; /* Largeur maximale de 100% */
     }
 
-    .content {
-        width: auto; /* Largeur automatique pour s'adapter au contenu */
-        float: none; /* Annuler le flottement pour centrer le contenu */
+    .task-list .task-item {
+        flex-direction: column; /* Affichage vertical pour les éléments de la liste des tâches */
+        text-align: left; /* Alignement du texte à gauche */
+        padding: 10px; /* Espacement intérieur */
+        border-bottom: 1px solid var(--blue-color); /* Bordure basse entre les éléments */
+    }
+
+    .task-list .task-item label {
+        flex: none; /* Réinitialiser l'agrandissement de l'espace disponible */
+        margin-bottom: 5px; /* Marge en bas pour séparer les éléments */
     }
 
     .image-container img {
-        max-width: 80%; /* Réduire la taille de l'image pour s'adapter aux écrans plus petits */
+        max-width: 50%; /* Réduire la taille de l'image pour s'adapter aux écrans plus petits */
+    }
+
+    .task-input form {
+        max-width: 100%; /* Ajuster la largeur du formulaire */
+    }
+
+    button[type="submit"] {
+        width: 100%; /* Ajuster la largeur du bouton de soumission */
     }
 }

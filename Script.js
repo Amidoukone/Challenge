@@ -1,6 +1,8 @@
 document.addEventListener("DOMContentLoaded", function() {
+    // Sélection du premier h2
+    const noTasksMessage = document.getElementById('noTasksMessage');
+
     // Sélection des éléments du formulaire
-    const taskForm = document.getElementById("taskForm");
     const taskInput = document.getElementById("taskInput");
     const deadlineInput = document.getElementById("deadlineInput");
     const priorityInput = document.getElementById("priorityInput");
@@ -11,10 +13,34 @@ document.addEventListener("DOMContentLoaded", function() {
     // Charger les tâches depuis le stockage local au chargement de la page
     loadTasks();
 
+    // Fonction pour vérifier si des tâches sont présentes et afficher/masquer le premier h2 en conséquence
+    function checkTasksPresence() {
+        // Sélection de tous les éléments de tâche
+        const taskItems = document.querySelectorAll('.task-item');
+
+        // Vérifier s'il y a des tâches présentes
+        if (taskItems.length > 0) {
+            // S'il y a des tâches, masquer le premier h2
+            noTasksMessage.style.display = 'none';
+        } else {
+            // S'il n'y a pas de tâches, afficher le premier h2
+            noTasksMessage.style.display = 'block';
+        }
+    }
+
+    // Appeler la fonction pour vérifier la présence de tâches une fois que le DOM est chargé
+    checkTasksPresence();
+
     // Ajouter une nouvelle tâche
+    const taskForm = document.getElementById("taskForm");
     taskForm.addEventListener("submit", function(event) {
         event.preventDefault();
+        addTask();
+        checkTasksPresence(); // Appeler la fonction pour vérifier à nouveau la présence de tâches après l'ajout d'une nouvelle tâche
+    });
 
+    // Fonction pour ajouter une nouvelle tâche
+    function addTask() {
         // Récupérer les valeurs du formulaire
         const taskText = taskInput.value;
         const deadline = deadlineInput.value;
@@ -58,27 +84,6 @@ document.addEventListener("DOMContentLoaded", function() {
 
         // Effacer le formulaire après l'ajout de la tâche
         taskForm.reset();
-        
-    });
-
-    // Supprimer une tâche
-    function deleteTask(taskItem) {
-        taskItem.remove();
-        // Enregistrer les tâches dans le stockage local après la suppression
-        saveTasks();
-    }
-
-    // Mettre à jour le statut d'une tâche
-    function updateTaskStatus(taskItem) {
-        const checkbox = taskItem.querySelector("input[type='checkbox']");
-        const label = taskItem.querySelector("label");
-        if (checkbox.checked) {
-            label.style.textDecoration = "line-through";
-        } else {
-            label.style.textDecoration = "none";
-        }
-        // Enregistrer les tâches dans le stockage local après la mise à jour du statut
-        saveTasks();
     }
 
     // Charger les tâches depuis le stockage local
@@ -90,7 +95,7 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     }
 
-    // Créer un élément de tâche
+    // Fonction pour créer un élément de tâche
     function createTaskElement(taskText, deadline, priority, completed) {
         const taskItem = document.createElement("div");
         taskItem.classList.add("task-item");
@@ -128,7 +133,29 @@ document.addEventListener("DOMContentLoaded", function() {
         return taskItem;
     }
 
-    // Enregistrer les tâches dans le stockage local
+    // Fonction pour supprimer une tâche
+    function deleteTask(taskItem) {
+        taskItem.remove();
+        // Enregistrer les tâches dans le stockage local après la suppression
+        saveTasks();
+        // Vérifier à nouveau la présence de tâches après la suppression
+        checkTasksPresence();
+    }
+
+    // Fonction pour mettre à jour le statut d'une tâche
+    function updateTaskStatus(taskItem) {
+        const checkbox = taskItem.querySelector("input[type='checkbox']");
+        const label = taskItem.querySelector("label");
+        if (checkbox.checked) {
+            label.style.textDecoration = "line-through";
+        } else {
+            label.style.textDecoration = "none";
+        }
+        // Enregistrer les tâches dans le stockage local après la mise à jour du statut
+        saveTasks();
+    }
+
+    // Fonction pour enregistrer les tâches dans le stockage local
     function saveTasks() {
         const tasks = [];
         document.querySelectorAll(".task-item").forEach(taskItem => {
@@ -141,4 +168,5 @@ document.addEventListener("DOMContentLoaded", function() {
         });
         localStorage.setItem("tasks", JSON.stringify(tasks));
     }
+
 });
